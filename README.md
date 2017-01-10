@@ -10,5 +10,5 @@ Students are expected to:
 Student Info
 =======================
 
-* Name: *YourNameHere*
-* ID: *YourIdHere*
+* Name: *PhungDucTuan*
+* ID: *USTH BI5-145*
