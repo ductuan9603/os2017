@@ -1,0 +1,33 @@
+#ps -e
+ 5936 ?        00:00:00 kworker/u8:0
+ 5973 ?        00:00:02 gedit
+ 6057 ?        00:00:00 kworker/1:0
+ 6085 ?        00:00:00 kworker/0:1
+ 6095 ?        00:00:00 kworker/u8:3
+ 6102 ?        00:00:00 kworker/3:2
+ 6132 ?        00:00:00 kworker/u8:1
+ 6139 ?        00:00:00 kworker/2:1
+ 6162 ?        00:00:00 kworker/3:1
+ 6217 pts/1    00:00:00 ps
+
+#ps -e | grep gedit
+ 5973 ?        00:00:03 gedit
+
+#cat /proc/5973/status
+CapEff:	0000000000000000
+CapBnd:	0000003fffffffff
+CapAmb:	0000000000000000
+Seccomp:	0
+Cpus_allowed:	f
+Cpus_allowed_list:	0-3
+Mems_allowed:	00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	8573
+nonvoluntary_ctxt_switches:	1243
+
+#kill -STOP 5973
+no output 
+#kill -CONT 5973
+no outout 
+#kill -KILL 5973
+no 
