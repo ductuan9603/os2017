@@ -1,0 +1,7 @@
+~$ ps -e | grep "firefox"
+ 2733 ?        00:01:27 firefox
+~$ ps -o nlwp 2733
+NLWP
+  51
+~$ ls /proc/2733/task | wc -l
+49
