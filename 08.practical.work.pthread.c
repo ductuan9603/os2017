@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<pthread.h>
 #define BUFFER_SIZE 10
 
 typedef struct{
@@ -28,37 +29,44 @@ item *consume() {
     return i;
 }
 
-void produceThread(){
-	item I[3];
+void *produceThread(void *params){
+	item i1; item i2;
+	printf("Produce thread.\n");
 	//declare the items
-	I[0].type = '0';
-	I[0].amount = 1;
-	I[0].unit = '2';
+	i1.type = '0';
+	i1.amount = 1;
+	i1.unit = '2';
 
-	I[1].type = '1';
-	I[1].amount = 2;
-	I[1].unit = '3';
+	i2.type = '1';
+	i2.amount = 2;
+	i2.unit = '3';
 
-	I[2].type = '0';
-	I[2].amount = 5;
-    I[2].unit = '2';
-
-	for(int i = 0 ,i < 3, i++){
-		produce(&I[i]);
-		printf("produce Items [%d]    first: %d    Last: %d\n",i, first, last);}
-}
-void consumeThread(int n){
-	for (int i=0,i<2,i++){
-		consume();
-		printf("consume: \n first: %d\n last: %d \n",first, last);}
+	i3.type = '0';
+	i3.amount = 5;
+    	i3.unit = '2';
+	printf("Produce item 1: Type: %c   Amount: %d   Unit: %c  ", i1.type,i1.amount,i1.unit );
+        produce(&i1);
+        printf(" First: %d, last: %d\n", first, last);
+        printf("Produce item 2: Type: %c   Amount: %d   Unit: %c  ", i2.type,i2.amount,i2.unit );
+        produce(&i2);
+        printf(" First: %d, last: %d\n", first, last);
+        printf("Produce item 3: Type: %c   Amount: %d   Unit: %c  ", i3.type,i3.amount,i3.unit );
+        produce(&i3);
+        printf(" First: %d, last: %d\n", first, last);
+  }
+void *consumeThread(void *params){
+	printf("Consume thread\n");
+        consume();
+        printf("Consume:\n First: %d, last: %d\n", first, last );
+        consume();
+        printf("Another:\n First: %d, last: %d\n", first, last );
 }
 
 int main(){
-    pthread_t tid_producer;
+	pthread_t tid_producer, tid_consumer;
 	pthread_create(&tid_producer,NULL,produceThread,NULL);
-    pthread_t tid_consumer;
 	pthread_create(&tid_consumer,NULL,consumeThread,NULL);
-    pthread_join(tid_producer, NULL);
+        pthread_join(tid_producer, NULL);
 	pthread_join(tid_consumer, NULL);
 return 0;
 }
