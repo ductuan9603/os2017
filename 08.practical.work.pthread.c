@@ -30,7 +30,7 @@ item *consume() {
 }
 
 void *produceThread(void *params){
-	item i1; item i2;
+	item i1; item i2; item i3;
 	printf("Produce thread.\n");
 	//declare the items
 	i1.type = '0';
