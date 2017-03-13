@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<pthread.h>
+#include <semaphore.h>
 #define BUFFER_SIZE 10
 
 typedef struct{
